@@ -1,0 +1,21 @@
+service: aws-demo-comprehend
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action: 
+        - comprehend:*
+      Resource: '*'
+
+functions:
+  awscomprehendanalyse:
+    handler: lambdas/endpoints/handler.handler
+    events:
+      - http:
+          path: analyse
+          method: POST
+          cors: true
